@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
   <title>My LIFF app</title>
   <link rel="stylesheet" href="css/style.css" media="all">
 </head>
+
 <body>
   <p id="os"><b>OS:</b> </p>
   <p id="language"><b>Language:</b> </p>
@@ -74,7 +76,7 @@
     }
 
     async function sendMsg() {
-      if (liff.getContext().type !== "none"){
+      if (liff.getContext().type !== "none") {
         await liff.sendMessages([
           {
             "type": "sticker",
@@ -101,14 +103,14 @@
       document.getElementById("statusMessage").append(profile.statusMessage)
       document.getElementById("displayName").append(profile.displayName)
     }
- 
+
     function getEnvironment() {
       document.getElementById("os").append(liff.getOS())
       document.getElementById("language").append(liff.getLanguage())
       document.getElementById("version").append(liff.getVersion())
       document.getElementById("accessToken").append(liff.getAccessToken())
       document.getElementById("isInClient").append(liff.isInClient())
-      if(liff.isInClient()){
+      if (liff.isInClient()) {
         document.getElementById("btnLogOut").style.display = "none"
       } else {
         document.getElementById("btnMsg").style.display = "none"
@@ -119,13 +121,18 @@
 
     async function main() {
       await liff.init({ liffId: "1656536453-y1YrGkML" })
-      getEnvironment()
-      getUserProfile()
-      getContext()
+      document.getElementById("isLoggedIn").append(liff.isLoggedIn())
+      if (liff.isLoggedIn()) {
+        getEnvironment()
+        getUserProfile()
+        getContext()
+      }
+
       // getFriendship()
       // createUniversalLink()
     }
     main()
   </script>
 </body>
+
 </html>
